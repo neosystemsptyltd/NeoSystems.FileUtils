@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>NeoSystems.FileUtils</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Armand Jordaan</Authors>
+    <Description>Some file utils for .NET</Description>
+    <PackageTags>File;Utilities</PackageTags>
+    <Company>Neo Systems (Pty) Ltd</Company>
+    <AssemblyTitle>.NET File Utilties</AssemblyTitle>
+    <Copyright>© 2024 Neo Systems</Copyright>
+    <ProjectUrl>https://github.com/neosystemsptyltd/NeoSystems.FileUtils/</ProjectUrl>
+    <RepositoryUrl>https://github.com/neosystemsptyltd/NeoSystems.FileUtils/</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PublishProjectUrl>true</PublishProjectUrl>
+  </PropertyGroup>
+
+</Project>
