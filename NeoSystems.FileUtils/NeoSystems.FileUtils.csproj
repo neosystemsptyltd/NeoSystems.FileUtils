@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>NeoSystems.FileUtils</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Armand Jordaan</Authors>
     <Description>Some file utils for .NET</Description>
     <PackageTags>File;Utilities</PackageTags>
