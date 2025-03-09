@@ -3,7 +3,7 @@ using NeoSystems.FileUtils;
 
 namespace NeoSystems.FileUtils.Test;
 
-public class Tests
+public class FileUtilsTests
 {
     [SetUp]
     public void Setup()
