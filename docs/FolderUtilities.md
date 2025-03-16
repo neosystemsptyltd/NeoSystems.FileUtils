@@ -11,8 +11,18 @@ The `FolderUtilities` class provides utility methods to retrieve files based on 
   - If the folder does not exist or is empty, it returns an empty string.
   - Throws an exception if an error occurs during the process.
 
+- **GetOldestFile(string inputFolder, string searchPattern)**
+  - Returns the full path of the oldest file in the specified folder matching the search pattern.
+  - If the folder does not exist or is empty, it returns an empty string.
+  - Throws an exception if an error occurs during the process.
+
 - **GetNewestFile(string inputFolder)**
   - Returns the full path of the newest file in the specified folder.
+  - If the folder does not exist or is empty, it returns an empty string.
+  - Throws an exception if an error occurs during the process.
+
+- **GetNewestFile(string inputFolder, string searchPattern)**
+  - Returns the full path of the newest file in the specified folder matching the search pattern.
   - If the folder does not exist or is empty, it returns an empty string.
   - Throws an exception if an error occurs during the process.
 
@@ -41,6 +51,27 @@ Finds and returns the full path of the oldest file in the specified folder. The 
 
 ---
 
+### GetOldestFile (with a search pattern)
+
+```csharp
+public static string GetOldestFile(string inputFolder, string searchPattern = "*.*")
+```
+
+#### Description
+Finds and returns the full path of the oldest file in the specified folder, based on the optional search pattern for file names. The method first checks if the folder exists. It then orders the files by their last write time in ascending order to find the oldest file. If the folder does not exist or is empty, the method returns an empty string.
+
+#### Parameters
+- **inputFolder**: A `string` representing the path of the folder to search for files.
+- **searchPattern**: An optional `string` that specifies the search pattern for filtering files within the folder. The default is `"*.*"` which includes all files.
+
+#### Returns
+- A `string` that is the full path of the oldest file found in the folder.
+- Returns an empty string if the folder does not exist or contains no files matching the search pattern.
+
+#### Exception Handling
+- If an exception occurs during the process, the method catches it and throws a new exception with a message indicating the error and the folder path where the error occurred.
+---
+
 ### GetNewestFile
 
 ```csharp
@@ -59,6 +90,28 @@ Finds and returns the full path of the newest file in the specified folder. The 
 
 #### Exception Handling
 - Similar to `GetOldestFile`, if an exception occurs, it is caught and a new exception is thrown with an error message that includes the folder path.
+
+---
+
+### GetNewestFile (with a search pattern)
+
+```csharp
+public static string GetNewestFile(string inputFolder, string searchPattern = "*.*")
+```
+
+#### Description
+Finds and returns the full path of the newest file in the specified folder, utilizing an optional search pattern for file names. The method initially checks if the folder exists. It then orders the files by their last write time in descending order to locate the newest file. If the folder does not exist or is empty, the method returns an empty string.
+
+#### Parameters
+- **inputFolder**: A `string` representing the path of the folder to search for files.
+- **searchPattern**: An optional `string` that specifies the search pattern used to filter files within the folder. The default is `"*.*"`, which matches all files.
+
+#### Returns
+- A `string` that represents the full path of the newest file found in the folder.
+- Returns an empty string if the folder does not exist or contains no files matching the search pattern.
+
+#### Exception Handling
+- If an error occurs during the process, the method catches it and throws a new exception with a message indicating the error and specifying the folder path where the error occurred.
 
 ---
 
