@@ -18,18 +18,30 @@ public class FolderUtilitiesTests
         {
             Path.Combine(_testFolderPath, "file1.txt"),
             Path.Combine(_testFolderPath, "file2.txt"),
-            Path.Combine(_testFolderPath, "file3.txt")
+            Path.Combine(_testFolderPath, "file3.txt"),
+            Path.Combine(_testFolderPath, "file4.dat"),
+            Path.Combine(_testFolderPath, "file5.dat"),
+            Path.Combine(_testFolderPath, "file6.dat")
         };
 
         // Create files with different last write times
         File.WriteAllText(_testFiles[0], "File 1 content");
-        File.SetLastWriteTime(_testFiles[0], DateTime.Now.AddDays(-2));
+        File.SetLastWriteTime(_testFiles[0], DateTime.Now.AddDays(-5));
 
         File.WriteAllText(_testFiles[1], "File 2 content");
-        File.SetLastWriteTime(_testFiles[1], DateTime.Now.AddDays(-1));
+        File.SetLastWriteTime(_testFiles[1], DateTime.Now.AddDays(-4));
 
         File.WriteAllText(_testFiles[2], "File 3 content");
-        File.SetLastWriteTime(_testFiles[2], DateTime.Now);
+        File.SetLastWriteTime(_testFiles[2], DateTime.Now.AddDays(-3));
+
+        File.WriteAllText(_testFiles[3], "File 4 content");
+        File.SetLastWriteTime(_testFiles[3], DateTime.Now.AddDays(-2));
+
+        File.WriteAllText(_testFiles[4], "File 5 content");
+        File.SetLastWriteTime(_testFiles[4], DateTime.Now.AddDays(-1));
+
+        File.WriteAllText(_testFiles[5], "File 6 content");
+        File.SetLastWriteTime(_testFiles[5], DateTime.Now);
     }
 
     [TearDown]
@@ -49,13 +61,33 @@ public class FolderUtilitiesTests
     }
 
     [Test]
+    public void GetOldestFileWithSearchPattern_ReturnsOldestFile()
+    {
+        // Act
+        string oldestFile = FolderUtilities.GetOldestFile(_testFolderPath, "*.dat");
+
+        // Assert
+        Assert.That(oldestFile, Is.EqualTo(_testFiles[3]));
+    }
+
+    [Test]
+    public void GetNewestFileWithSearchPattern_ReturnsNewestFile()
+    {
+        // Act
+        string newestFile = FolderUtilities.GetNewestFile(_testFolderPath, "*.txt");
+
+        // Assert
+        Assert.That(newestFile, Is.EqualTo(_testFiles[2]));
+    }
+
+    [Test]
     public void GetNewestFile_ReturnsNewestFile()
     {
         // Act
         string newestFile = FolderUtilities.GetNewestFile(_testFolderPath);
 
         // Assert
-        Assert.That(newestFile, Is.EqualTo(_testFiles[2]));
+        Assert.That(newestFile, Is.EqualTo(_testFiles[5]));
     }
 
     [Test]
