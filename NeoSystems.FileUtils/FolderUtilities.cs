@@ -12,30 +12,7 @@ public class FolderUtilities
     /// <exception cref="Exception"></exception>
     public static string GetOldestFile(string inputFolder)
     {
-        try
-        {
-            // get the oldest file in the input folder
-            if (!Directory.Exists(inputFolder))
-            {
-                return string.Empty;
-            }
-
-            var directory = new DirectoryInfo(inputFolder);
-            var oldestFile = directory.GetFiles()
-                .OrderBy(f => f.LastWriteTime)
-                .FirstOrDefault();
-
-            if (oldestFile == null)
-            {
-                return string.Empty;
-            }
-
-            return oldestFile.FullName;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Error getting oldest file in folder {inputFolder}", ex);
-        }
+        return GetOldestFile(inputFolder, "*");
     }
 
     /// <summary>
@@ -56,9 +33,15 @@ public class FolderUtilities
             }
 
             var directory = new DirectoryInfo(inputFolder);
-            var oldestFile = directory.GetFiles(searchPattern)
-                .OrderBy(f => f.LastWriteTime)
-                .FirstOrDefault();
+            FileInfo oldestFile = null;
+
+            foreach (var file in directory.EnumerateFiles(searchPattern))
+            {
+                if (oldestFile == null || file.LastWriteTime < oldestFile.LastWriteTime)
+                {
+                    oldestFile = file;
+                }
+            }
 
             if (oldestFile == null)
             {
@@ -80,30 +63,7 @@ public class FolderUtilities
     /// <returns>string</returns>
     public static string GetNewestFile(string inputFolder)
     {
-        try
-        {
-            // get the newest file in the input folder
-            if (!Directory.Exists(inputFolder))
-            {
-                return string.Empty;
-            }
-
-            var directory = new DirectoryInfo(inputFolder);
-            var newestFile = directory.GetFiles()
-                .OrderByDescending(f => f.LastWriteTime)
-                .FirstOrDefault();
-
-            if (newestFile == null)
-            {
-                return string.Empty;
-            }
-
-            return newestFile.FullName;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Error getting newest file in folder {inputFolder}", ex);
-        }
+        return GetNewestFile(inputFolder, "*");
     }
 
     /// <summary>
@@ -123,9 +83,15 @@ public class FolderUtilities
             }
 
             var directory = new DirectoryInfo(inputFolder);
-            var newestFile = directory.GetFiles(searchPattern)
-                .OrderByDescending(f => f.LastWriteTime)
-                .FirstOrDefault();
+            FileInfo newestFile = null;
+
+            foreach (var file in directory.EnumerateFiles(searchPattern))
+            {
+                if (newestFile == null || file.LastWriteTime > newestFile.LastWriteTime)
+                {
+                    newestFile = file;
+                }
+            }
 
             if (newestFile == null)
             {
